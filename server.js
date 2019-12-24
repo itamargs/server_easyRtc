@@ -53,18 +53,18 @@ easyrtc.setOption("appIceServers", appIceServers);
 
 
 
-easyrtc.on("getIceConfig", function(connectionObj, callback){
-    console.log("!!!!!!!!!ON ICE CONFIG!!!!")
-    var appIceServers = [                                    // Array of STUN and TURN servers. By default there is only publicly available STUN servers.
-        {
-                  "urls":"turn:stun:numb.viagenie.ca", 
-                  "username":"itamargs111@gmail.com",
-                  "credential":"igwebrctpass"
-        }
+// easyrtc.on("getIceConfig", function(connectionObj, callback){
+//     console.log("!!!!!!!!!ON ICE CONFIG!!!!")
+//     var appIceServers = [                                    // Array of STUN and TURN servers. By default there is only publicly available STUN servers.
+//         {
+//                   "urls":"turn:stun:numb.viagenie.ca", 
+//                   "username":"itamargs111@gmail.com",
+//                   "credential":"igwebrctpass"
+//         }
          
-];
-    callback(null, appIceServers);
-  });
+// ];
+//     callback(null, appIceServers);
+//   });
 
 
 // Overriding the default easyrtcAuth listener, only so we can directly access its callback
