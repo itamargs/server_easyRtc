@@ -27,21 +27,22 @@ var socketServer = socketIo.listen(webServer, {"log level":1});
 easyrtc.setOption("logLevel", "debug");
 
 var myIceServers = [
-    {"urls":"stun:stun:numb.viagenie.ca"},
+    {"urls":"stun:stun:numb.viagenie.ca:443"},
     {
-      "urls":"turn:stun:numb.viagenie.ca", 
+      "urls":"turn:stun:numb.viagenie.ca:443", 
       "username":"itamargs111@gmail.com",
       "credential":"igwebrctpass"
     },
     {
-        "urls":"turn:stun:numb.viagenie.ca?transport=tcp", 
+        "urls":"turn:stun:numb.viagenie.ca?:443transport=tcp", 
         "username":"itamargs111@gmail.com",
         "credential":"igwebrctpass"
     }
   ];
 
 
-  easyrtc.setOption("appIceServers", myIceServers);
+  var check = easyrtc.setOption("appIceServers", myIceServers);
+
 
 //   easyrtc.on("getIceConfig", function(connectionObj, callback){
 //     callback(null, myIceServers);
