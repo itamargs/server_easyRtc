@@ -86,7 +86,7 @@ easyrtc.on("getIceConfig", function(connectionObj, callback){
         "credential": "igwebrctpass"
       }
     ];
-    callback(null, myIceServers);
+    console.log(callback(null, myIceServers));
   });
 
 
