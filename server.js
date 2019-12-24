@@ -56,13 +56,13 @@ easyrtc.setOption("appIceServers", appIceServers);
 easyrtc.on("getIceConfig", function(connectionObj, callback){
     console.log("!!!!!!!!!ON ICE CONFIG!!!!")
     var appIceServers = [                                    // Array of STUN and TURN servers. By default there is only publicly available STUN servers.
-    {urls: "stun:stun.l.google.com:19302"},
-    {urls: "stun:stun.sipgate.net"},
-    {urls: "stun:217.10.68.152"},
-    {urls: "stun:stun.sipgate.net:10000"},
-    {urls: "stun:217.10.68.152:10000"}
+        {
+                  "urls":"turn:stun:numb.viagenie.ca", 
+                  "username":"itamargs111@gmail.com",
+                  "credential":"igwebrctpass"
+         
 ];
-    console.log(callback(null, appIceServers));
+    callback(null, appIceServers);
   });
 
 
