@@ -43,9 +43,9 @@ var myIceServers = [
 
   easyrtc.setOption("appIceServers", myIceServers);
 
-  easyrtc.on("getIceConfig", function(connectionObj, callback){
-    callback(null, myIceServers);
-  })
+//   easyrtc.on("getIceConfig", function(connectionObj, callback){
+//     callback(null, myIceServers);
+//   })
 
 // Overriding the default easyrtcAuth listener, only so we can directly access its callback
 easyrtc.events.on("easyrtcAuth", function(socket, easyrtcid, msg, socketCallback, callback) {
