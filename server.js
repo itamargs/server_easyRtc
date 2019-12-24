@@ -1,15 +1,14 @@
+// node.js server intended to be deployed on heroku.
+// this server use for signaling for the angular webrtc app
+// heroku will use ssl connection for us (including certificates so no need fo ssl server)
+// Note - actual data transfer like video, will (almost) always be peer-to-peer. the server is only needed for handling requests and connecting peers
+
 // Load required modules
 var http    = require("http");              // http server core module
 var express = require("express");           // web framework external module
 var serveStatic = require('serve-static');  // serve static files
 var socketIo = require("socket.io");        // web socket external module
-
-// This sample is using the easyrtc from parent folder.
-// To use this server_example folder only without parent folder:
-// 1. you need to replace this "require("../");" by "require("easyrtc");"
-// 2. install easyrtc (npm i easyrtc --save) in server_example/package.json
-
-var easyrtc = require("easyrtc"); // EasyRTC internal module
+var easyrtc = require("easyrtc"); // import EasyRTC internal module
 
 // Set process name
 process.title = "node-easyrtc";
@@ -18,7 +17,7 @@ process.title = "node-easyrtc";
 var app = express();
 app.use(serveStatic('static', {'index': ['index.html']}));
 
-// Start Express http server on port 8080
+// Start Express http server on selected port
 var webServer = http.createServer(app);
 
 // Start Socket.io so it attaches itself to Express server
@@ -26,7 +25,8 @@ var socketServer = socketIo.listen(webServer, {"log level":1});
 
 easyrtc.setOption("logLevel", "debug");
 
-// var appIceServers = [                                    // Array of STUN and TURN servers. By default there is only publicly available STUN servers.
+// Array of STUN and TURN servers for connecting between peers not in the same host
+// var appIceServers = [                                    
 //     {urls: "stun:stun.l.google.com:19302"},
 //     {urls: "stun:stun.sipgate.net"},
 //     {urls: "stun:217.10.68.152"},
@@ -35,36 +35,6 @@ easyrtc.setOption("logLevel", "debug");
 // ];
 
 // easyrtc.setOption("appIceServers", appIceServers);
-
-
-// var myIceServers = [
-//     {"urls":"stun:stun:numb.viagenie.ca:443"},
-//     {
-//       "urls":"turn:stun:numb.viagenie.ca:443", 
-//       "username":"itamargs111@gmail.com",
-//       "credential":"igwebrctpass"
-//     },
-//     {
-//         "urls":"turn:stun:numb.viagenie.ca?:443transport=tcp", 
-//         "username":"itamargs111@gmail.com",
-//         "credential":"igwebrctpass"
-//     }
-//   ];
-
-
-
-// easyrtc.on("getIceConfig", function(connectionObj, callback){
-//     console.log("!!!!!!!!!ON ICE CONFIG!!!!")
-//     var appIceServers = [                                    // Array of STUN and TURN servers. By default there is only publicly available STUN servers.
-//         {
-//                   "urls":"turn:stun:numb.viagenie.ca", 
-//                   "username":"itamargs111@gmail.com",
-//                   "credential":"igwebrctpass"
-//         }
-         
-// ];
-//     callback(null, appIceServers);
-//   });
 
 
 // Overriding the default easyrtcAuth listener, only so we can directly access its callback
@@ -90,9 +60,6 @@ easyrtc.events.on("roomJoin", function(connectionObj, roomName, roomParameter, c
 });
 
 
-
-
-
 // Start EasyRTC server
 var rtc = easyrtc.listen(app, socketServer, null, function(err, rtcRef) {
     console.log("Initiated");
@@ -105,9 +72,7 @@ var rtc = easyrtc.listen(app, socketServer, null, function(err, rtcRef) {
 });
 
 
-
-
-// Listen on port 8443
+// Start listening
 webServer.listen(process.env.PORT, function () {
     var port = webServer.address().port;
     console.log('listening on http://localhost in port ' + port);

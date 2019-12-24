@@ -1,3 +1,7 @@
+// ssl server for secure connection.
+//will not be in use in this app
+
+
 // Load required modules
 var https   = require("https");     // https server core module
 var fs      = require("fs");        // file system core module
