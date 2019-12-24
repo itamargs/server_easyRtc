@@ -27,18 +27,24 @@ var socketServer = socketIo.listen(webServer, {"log level":1});
 easyrtc.setOption("logLevel", "debug");
 
 var myIceServers = [
-    {"urls":"stun:turn.blindsidenetworks.com"},
+    {"urls":"stun:stun:numb.viagenie.ca"},
     {
-      "urls":"turn:turn.example.com:443?transport=udp", //"ttl":86400
-      "username":"15498234672:w_490akzryfrud",
-      "credential":"vAe+8jsmsadfEo="
+      "urls":"turn:stun:numb.viagenie.ca", 
+      "username":"itamargs111@gmail.com",
+      "credential":"igwebrctpass"
     },
     {
-        "urls":"turn:turn.example.com:443?transport=tcp", //"ttl":86400
-        "username":"15498234672:w_490akzryfrud",
-        "credential":"vAe+8jsmsadfEo="
+        "urls":"turn:stun:numb.viagenie.ca", 
+        "username":"itamargs111@gmail.com",
+        "credential":"igwebrctpass"
     }
   ];
+
+  var servers = {'iceServers': [
+      {'urls': 'stun:stun.services.mozilla.com'},
+       {'urls': 'stun:stun.l.google.com:19302'},
+        {'urls': 'turn:numb.viagenie.ca','credential': 'beaver','username': 'webrtc.websitebeaver@gmail.com'}
+    ]};
 
   easyrtc.setOption("appIceServers", myIceServers);
   
