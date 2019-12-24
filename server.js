@@ -61,7 +61,7 @@ var rtc = easyrtc.listen(app, socketServer, null, function(err, rtcRef) {
 
 
 // Listen on port 8443
-webServer.listen(process.env.PORT || 5000, function () {
+webServer.listen(process.env.PORT, function () {
     var port = webServer.address().port;
     console.log('listening on http://localhost in port ' + port);
 });
