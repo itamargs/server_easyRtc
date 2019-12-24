@@ -26,15 +26,15 @@ var socketServer = socketIo.listen(webServer, {"log level":1});
 
 easyrtc.setOption("logLevel", "debug");
 
-var appIceServers = [                                    // Array of STUN and TURN servers. By default there is only publicly available STUN servers.
-    {urls: "stun:stun.l.google.com:19302"},
-    {urls: "stun:stun.sipgate.net"},
-    {urls: "stun:217.10.68.152"},
-    {urls: "stun:stun.sipgate.net:10000"},
-    {urls: "stun:217.10.68.152:10000"}
-];
+// var appIceServers = [                                    // Array of STUN and TURN servers. By default there is only publicly available STUN servers.
+//     {urls: "stun:stun.l.google.com:19302"},
+//     {urls: "stun:stun.sipgate.net"},
+//     {urls: "stun:217.10.68.152"},
+//     {urls: "stun:stun.sipgate.net:10000"},
+//     {urls: "stun:217.10.68.152:10000"}
+// ];
 
-easyrtc.setOption("appIceServers", appIceServers);
+// easyrtc.setOption("appIceServers", appIceServers);
 
 
 // var myIceServers = [
@@ -76,6 +76,20 @@ easyrtc.events.on("roomJoin", function(connectionObj, roomName, roomParameter, c
     console.log("["+connectionObj.getEasyrtcid()+"] Credential retrieved!", connectionObj.getFieldValueSync("credential"));
     easyrtc.events.defaultListeners.roomJoin(connectionObj, roomName, roomParameter, callback);
 });
+
+easyrtc.on("getIceConfig", function(connectionObj, callback){
+    var myIceServers=[
+      {"url":"stun:numb.viagenie.ca:3478"},
+      {
+        "url":        "turn:numb.viagenie.ca:3478",
+        "username":   "itamargs111@gmail.com",
+        "credential": "igwebrctpass"
+      }
+    ];
+    callback(null, myIceServers);
+  });
+
+
 
 // Start EasyRTC server
 var rtc = easyrtc.listen(app, socketServer, null, function(err, rtcRef) {
