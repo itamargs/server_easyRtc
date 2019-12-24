@@ -53,6 +53,17 @@ easyrtc.setOption("logLevel", "debug");
 
 
 
+easyrtc.on("getIceConfig", function(connectionObj, callback){
+    console.log("!!!!!!!!!ON ICE CONFIG!!!!")
+    var appIceServers = [                                    // Array of STUN and TURN servers. By default there is only publicly available STUN servers.
+    {urls: "stun:stun.l.google.com:19302"},
+    {urls: "stun:stun.sipgate.net"},
+    {urls: "stun:217.10.68.152"},
+    {urls: "stun:stun.sipgate.net:10000"},
+    {urls: "stun:217.10.68.152:10000"}
+];
+    console.log(callback(null, appIceServers));
+  });
 
 
 // Overriding the default easyrtcAuth listener, only so we can directly access its callback
@@ -77,17 +88,7 @@ easyrtc.events.on("roomJoin", function(connectionObj, roomName, roomParameter, c
     easyrtc.events.defaultListeners.roomJoin(connectionObj, roomName, roomParameter, callback);
 });
 
-easyrtc.on("getIceConfig", function(connectionObj, callback){
-    var myIceServers=[
-      {"url":"stun:numb.viagenie.ca:3478"},
-      {
-        "url":        "turn:numb.viagenie.ca:3478",
-        "username":   "itamargs111@gmail.com",
-        "credential": "igwebrctpass"
-      }
-    ];
-    console.log(callback(null, myIceServers));
-  });
+
 
 
 
