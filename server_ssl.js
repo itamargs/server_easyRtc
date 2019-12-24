@@ -37,8 +37,8 @@ httpApp.use(function(req, res, next) {
 
 // Start Express https server on port 8443
 var webServer = https.createServer({
-    key:  fs.readFileSync(__dirname + "/server.key"),
-    cert: fs.readFileSync(__dirname + "/server.crt")
+    key:  fs.readFileSync("server.key"),
+    cert: fs.readFileSync("server.crt")
 }, httpApp);
 
 // Start Socket.io so it attaches itself to Express server
