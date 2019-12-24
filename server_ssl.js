@@ -15,7 +15,7 @@ var easyrtc = require("easyrtc");; // EasyRTC internal module
 // Setup and configure Express http server. Expect a subfolder called "static" to be the web root.
 var httpApp = express();
 httpApp.use(express.static(__dirname + "/static/"));
-httpApp.use(cors({ origin: 'https://videochatitamargs.firebaseapp.com' , credentials :  true}));
+httpApp.use(cors({ origin: 'http://localhost:4200' , credentials :  true}));
 
 httpApp.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", '*');
