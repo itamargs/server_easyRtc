@@ -34,7 +34,7 @@ var appIceServers = [                                    // Array of STUN and TU
     {urls: "stun:217.10.68.152:10000"}
 ];
 
-easyrtc.setOption("appIceServers", appIceServers);
+// easyrtc.setOption("appIceServers", appIceServers);
 
 
 // var myIceServers = [
