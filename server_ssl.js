@@ -16,6 +16,13 @@ var easyrtc = require("easyrtc");; // EasyRTC internal module
 var httpApp = express();
 httpApp.use(express.static(__dirname + "/static/"));
 httpApp.use(cors({ origin: 'https://videochatitamargs.firebaseapp.com/' , credentials :  true}));
+httpApp.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", '*');
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+    next();
+});
 
 // Start Express https server on port 8443
 var webServer = https.createServer({
