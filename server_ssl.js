@@ -3,7 +3,7 @@ var https   = require("https");     // https server core module
 var fs      = require("fs");        // file system core module
 var express = require("express");   // web framework external module
 var io      = require("socket.io"); // web socket external module
-var cors = require('cors');
+// var cors = require('cors');
 
 // This sample is using the easyrtc from parent folder.
 // To use this server_example folder only without parent folder:
@@ -15,7 +15,7 @@ var easyrtc = require("easyrtc");; // EasyRTC internal module
 // Setup and configure Express http server. Expect a subfolder called "static" to be the web root.
 var httpApp = express();
 httpApp.use(express.static(__dirname + "/static/"));
-httpApp.use(cors({ origin: 'http://localhost:4200' , credentials :  true}));
+// httpApp.use(cors({ origin: 'http://localhost:4200' , credentials :  true}));
 
 
 httpApp.use(function(req, res, next) {
