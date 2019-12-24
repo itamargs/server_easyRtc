@@ -17,13 +17,23 @@ var httpApp = express();
 httpApp.use(express.static(__dirname + "/static/"));
 httpApp.use(cors({ origin: 'http://localhost:4200' , credentials :  true}));
 
+
 httpApp.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", '*');
-    res.header("Access-Control-Allow-Credentials", true);
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
-    next();
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+ // Add this
+ if (req.method === 'OPTIONS') {
+
+      res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, OPTIONS');
+      res.header('Access-Control-Max-Age', 120);
+      return res.status(200).json({});
+  }
+
+  next();
+
 });
+
 
 // Start Express https server on port 8443
 var webServer = https.createServer({
