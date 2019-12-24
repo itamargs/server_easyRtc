@@ -60,6 +60,7 @@ easyrtc.on("getIceConfig", function(connectionObj, callback){
                   "urls":"turn:stun:numb.viagenie.ca", 
                   "username":"itamargs111@gmail.com",
                   "credential":"igwebrctpass"
+        }
          
 ];
     callback(null, appIceServers);
