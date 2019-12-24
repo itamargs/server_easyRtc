@@ -34,20 +34,18 @@ var myIceServers = [
       "credential":"igwebrctpass"
     },
     {
-        "urls":"turn:stun:numb.viagenie.ca", 
+        "urls":"turn:stun:numb.viagenie.ca?transport=tcp", 
         "username":"itamargs111@gmail.com",
         "credential":"igwebrctpass"
     }
   ];
 
-  var servers = {'iceServers': [
-      {'urls': 'stun:stun.services.mozilla.com'},
-       {'urls': 'stun:stun.l.google.com:19302'},
-        {'urls': 'turn:numb.viagenie.ca','credential': 'beaver','username': 'webrtc.websitebeaver@gmail.com'}
-    ]};
 
   easyrtc.setOption("appIceServers", myIceServers);
-  
+
+  easyrtc.on("getIceConfig", function(connectionObj, callback){
+    callback(null, myIceServers);
+  })
 
 // Overriding the default easyrtcAuth listener, only so we can directly access its callback
 easyrtc.events.on("easyrtcAuth", function(socket, easyrtcid, msg, socketCallback, callback) {
