@@ -27,7 +27,8 @@ var socketServer = io.listen(webServer, {"log level":1});
 // Start EasyRTC server
 var rtc = easyrtc.listen(httpApp, socketServer);
 
-// Listen on port 8443
-webServer.listen(8443, function () {
-    console.log('listening on https://localhost:8443');
+// Listen on port 5000 for heroku
+webServer.listen(process.env.PORT || 5000, function () {
+    console.log('listening on https://localhost:port');
 });
+
